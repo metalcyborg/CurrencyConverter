@@ -12,8 +12,9 @@ import com.metalcyborg.currencyconverter.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConverterFragment extends Fragment {
+public class ConverterFragment extends Fragment implements ConverterContract.View {
 
+    private ConverterContract.Presenter mPresenter;
 
     public ConverterFragment() {
         // Required empty public constructor
@@ -33,4 +34,8 @@ public class ConverterFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_converter, container, false);
     }
 
+    @Override
+    public void setPresenter(ConverterContract.Presenter presenter) {
+        mPresenter = presenter;
+    }
 }
