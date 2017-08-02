@@ -60,18 +60,34 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
         mCurrencyFromSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                // TODO: check this method
+                Currency currency = (Currency) parent.getItemAtPosition(position);
+                mPresenter.setCurrencyFrom(currency);
             }
         });
 
         mCurrencyToSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                // TODO: check this method
+                Currency currency = (Currency) parent.getItemAtPosition(position);
+                mPresenter.setCurrencyTo(currency);
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.stop();
     }
 
     @Override

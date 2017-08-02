@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.CurrencyModel;
+import com.metalcyborg.currencyconverter.util.ConverterUtil;
 
 public class ConverterPresenter implements ConverterContract.Presenter {
 
@@ -21,6 +22,7 @@ public class ConverterPresenter implements ConverterContract.Presenter {
 
     @Override
     public void start() {
+        // Load currency data
 
     }
 
@@ -31,16 +33,17 @@ public class ConverterPresenter implements ConverterContract.Presenter {
 
     @Override
     public void calculateAmount(float fromValue) {
-
+        float amount = ConverterUtil.calculateAmount(mCurrencyFrom, mCurrencyTo, fromValue);
+        mView.displaySum(amount);
     }
 
     @Override
     public void setCurrencyFrom(Currency currency) {
-
+        mCurrencyFrom = currency;
     }
 
     @Override
     public void setCurrencyTo(Currency currency) {
-
+        mCurrencyTo = currency;
     }
 }
