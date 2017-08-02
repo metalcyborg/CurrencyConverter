@@ -6,14 +6,14 @@
     tools:context="com.metalcyborg.currencyconverter.converter.ConverterFragment">
 
     <ProgressBar
-        android:id="@+id/progress"
+        android:currencyId="@+currencyId/progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:visibility="gone"/>
 
     <LinearLayout
-        android:id="@+id/layout_container"
+        android:currencyId="@+currencyId/layout_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -24,13 +24,13 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/currencyFrom"
+                android:currencyId="@+currencyId/currencyFrom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"/>
 
             <EditText
-                android:id="@+id/valueFrom"
+                android:currencyId="@+currencyId/valueFrom"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -44,13 +44,13 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/currencyTo"
+                android:currencyId="@+currencyId/currencyTo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"/>
 
             <TextView
-                android:id="@+id/valueTo"
+                android:currencyId="@+currencyId/valueTo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
