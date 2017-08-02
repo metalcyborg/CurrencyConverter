@@ -3,6 +3,8 @@ package com.metalcyborg.currencyconverter.model.source.local;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.metalcyborg.currencyconverter.model.Currency;
+
 public class LocalDataSourceImpl implements LocalDataSource {
 
     private static volatile LocalDataSource mInstance;
@@ -22,5 +24,15 @@ public class LocalDataSourceImpl implements LocalDataSource {
         }
 
         return mInstance;
+    }
+
+    @Override
+    public void loadCurrenciesData() {
+
+    }
+
+    @Override
+    public void updateCurrencyData(String currencyId, Currency currency) {
+
     }
 }
