@@ -19,7 +19,7 @@ public interface ConverterContract {
 
     interface Presenter extends BasePresenter {
 
-        void calculateSum(float currencyValue);
+        void calculateAmount(float fromValue);
 
         void setCurrencyFrom(Currency currency);
 
