@@ -38,7 +38,7 @@ public class ConverterPresenter implements ConverterContract.Presenter,
     @Override
     public void start() {
         // Load currency data
-        mLoaderManager.initLoader(CURRENCY_QUERY, null, this);
+        mLoaderManager.initLoader(CURRENCY_QUERY, null, this).forceLoad();
     }
 
     @Override

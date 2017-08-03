@@ -28,5 +28,10 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'
+    compile ('org.simpleframework:simple-xml:2.7.1') {
+        exclude module: 'stax-api'
+        exclude module: 'stax'
+        exclude module: 'xpp3'
+    }
     testCompile 'junit:junit:4.12'
 }
