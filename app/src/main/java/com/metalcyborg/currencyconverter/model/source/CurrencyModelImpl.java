@@ -29,4 +29,9 @@ public class CurrencyModelImpl implements CurrencyModel {
 
         return mInstance;
     }
+
+    @Override
+    public void loadCurrenciesData(GetCurrencyListCallback callback) {
+
+    }
 }

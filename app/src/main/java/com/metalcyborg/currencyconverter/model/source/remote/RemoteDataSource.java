@@ -1,17 +1,8 @@
 package com.metalcyborg.currencyconverter.model.source.remote;
 
-import com.metalcyborg.currencyconverter.model.Currency;
-
-import java.util.List;
+import com.metalcyborg.currencyconverter.model.source.GetCurrencyListCallback;
 
 public interface RemoteDataSource {
 
-    interface CurrencyListCallback {
-
-        void onDataLoaded(List<Currency> currencyList);
-
-        void onDataNotAvailable();
-    }
-
-    void loadCurrenciesData(CurrencyListCallback callback);
+    void loadCurrenciesData(GetCurrencyListCallback callback);
 }

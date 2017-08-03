@@ -1,5 +1,7 @@
 package com.metalcyborg.currencyconverter.model.source.remote;
 
+import com.metalcyborg.currencyconverter.model.source.GetCurrencyListCallback;
+
 public class RemoteDataSourceImpl implements RemoteDataSource {
 
     private static volatile RemoteDataSource mInstance;
@@ -20,8 +22,9 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         return mInstance;
     }
 
+
     @Override
-    public void loadCurrenciesData(CurrencyListCallback callback) {
+    public void loadCurrenciesData(GetCurrencyListCallback callback) {
 
     }
 }

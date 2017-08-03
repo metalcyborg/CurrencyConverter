@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.metalcyborg.currencyconverter.model.Currency;
+import com.metalcyborg.currencyconverter.model.source.GetCurrencyListCallback;
 
 public class LocalDataSourceImpl implements LocalDataSource {
 
@@ -27,7 +28,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public void loadCurrenciesData() {
+    public void loadCurrenciesData(GetCurrencyListCallback callback) {
 
     }
 
