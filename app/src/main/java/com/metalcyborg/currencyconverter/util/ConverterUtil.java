@@ -6,7 +6,8 @@ public class ConverterUtil {
 
     public static float calculateAmount(Currency currencyFrom, Currency currencyTo,
                                         float fromValue) {
-        return 0f;
+        return fromValue * (currencyFrom.getValue() / currencyFrom.getNominal()) /
+                (currencyTo.getValue() / currencyTo.getNominal());
     }
 
     public static float convertStringToFloat(String numberString)
@@ -28,4 +29,6 @@ public class ConverterUtil {
 
         return result;
     }
+
+
 }

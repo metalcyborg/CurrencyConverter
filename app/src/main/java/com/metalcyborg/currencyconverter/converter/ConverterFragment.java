@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -29,6 +30,7 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
     private Spinner mCurrencyToSpinner;
     private EditText mValueFromText;
     private TextView mAmountValueText;
+    private Button mCalcButton;
     private ProgressBar mProgressBar;
     private LinearLayout mLayoutContainer;
     private CurrencyAdapter mCurrencyFromAdapter;
@@ -54,6 +56,7 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
         mCurrencyToSpinner = (Spinner) view.findViewById(R.id.currencyTo);
         mValueFromText = (EditText) view.findViewById(R.id.valueFrom);
         mAmountValueText = (TextView) view.findViewById(R.id.valueTo);
+        mCalcButton = (Button) view.findViewById(R.id.calcButton);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
         mLayoutContainer = (LinearLayout) view.findViewById(R.id.layout_container);
 
@@ -80,6 +83,18 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        mCalcButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String valueText = mValueFromText.getText().toString();
+                if(valueText.isEmpty())
+                    return;
+
+                float value = Float.parseFloat(valueText);
+                mPresenter.calculateAmount(value);
             }
         });
 

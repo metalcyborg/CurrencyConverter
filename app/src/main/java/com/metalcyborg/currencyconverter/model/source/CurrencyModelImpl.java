@@ -73,6 +73,7 @@ public class CurrencyModelImpl implements CurrencyModel {
         if(currencyList == null) {
             return mLocalDataSource.getCurrencies();
         } else {
+            mLocalDataSource.updateCurrencyData(currencyList);
             return currencyList;
         }
     }

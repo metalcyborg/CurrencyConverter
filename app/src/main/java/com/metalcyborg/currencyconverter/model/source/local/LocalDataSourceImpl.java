@@ -59,12 +59,12 @@ public class LocalDataSourceImpl implements LocalDataSource {
         List<Currency> currencyList = new ArrayList<>();
         while (cursor.moveToNext()) {
             Currency currency = new Currency(
-                    cursor.getString(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_VALUTE_ID)),
-                    cursor.getInt(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_NUM_CODE)),
-                    cursor.getString(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_CHAR_CODE)),
-                    cursor.getInt(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_NOMINAL)),
-                    cursor.getString(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_NAME)),
-                    cursor.getFloat(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_VALUE))
+                    cursor.getString(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_VALUTE_ID.trim())),
+                    cursor.getInt(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_NUM_CODE.trim())),
+                    cursor.getString(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_CHAR_CODE.trim())),
+                    cursor.getInt(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_NOMINAL.trim())),
+                    cursor.getString(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_NAME.trim())),
+                    cursor.getFloat(cursor.getColumnIndex(CurrencyPersistenceContract.CurrencyTable.COLUMN_VALUE.trim()))
             );
             currencyList.add(currency);
         }
