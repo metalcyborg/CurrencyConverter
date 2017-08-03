@@ -3,7 +3,6 @@ package com.metalcyborg.currencyconverter.converter;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.widget.ListViewAutoScrollHelper;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.CurrencyListLoader;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyFloat;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
