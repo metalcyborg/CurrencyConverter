@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.CurrencyListLoader;
@@ -12,6 +11,8 @@ import com.metalcyborg.currencyconverter.model.source.CurrencyModel;
 import com.metalcyborg.currencyconverter.util.ConverterUtil;
 
 import java.util.List;
+
+import static com.metalcyborg.currencyconverter.util.ConverterUtil.checkNotNull;
 
 public class ConverterPresenter implements ConverterContract.Presenter,
         LoaderManager.LoaderCallbacks<List<Currency>> {
@@ -29,10 +30,10 @@ public class ConverterPresenter implements ConverterContract.Presenter,
                               @NonNull LoaderManager loaderManager,
                               @NonNull CurrencyModel model,
                               @NonNull ConverterContract.View view) {
-        mLoader = loader;
-        mLoaderManager = loaderManager;
-        mModel = model;
-        mView = view;
+        mLoader = checkNotNull(loader, "Loader cannot be null!");
+        mLoaderManager = checkNotNull(loaderManager, "Loader manager cannot be null!");
+        mModel = checkNotNull(model, "Model cannot be null!");
+        mView = checkNotNull(view, "View cannot be null!");
         mView.setPresenter(this);
     }
 
@@ -50,18 +51,22 @@ public class ConverterPresenter implements ConverterContract.Presenter,
 
     @Override
     public void calculateAmount(float fromValue) {
+        if(fromValue < 0) {
+            throw new IllegalArgumentException("Currency value cannot be less than 0!");
+        }
+
         float amount = ConverterUtil.calculateAmount(mCurrencyFrom, mCurrencyTo, fromValue);
         mView.displaySum(amount);
     }
 
     @Override
-    public void setCurrencyFrom(Currency currency) {
-        mCurrencyFrom = currency;
+    public void setCurrencyFrom(@NonNull Currency currency) {
+        mCurrencyFrom = checkNotNull(currency, "Currency cannot be null!");
     }
 
     @Override
-    public void setCurrencyTo(Currency currency) {
-        mCurrencyTo = currency;
+    public void setCurrencyTo(@NonNull Currency currency) {
+        mCurrencyTo = checkNotNull(currency, "Currency cannot be null!");
     }
 
     @Override

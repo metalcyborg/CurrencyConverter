@@ -1,5 +1,7 @@
 package com.metalcyborg.currencyconverter.util;
 
+import android.support.annotation.Nullable;
+
 import com.metalcyborg.currencyconverter.model.Currency;
 
 public class ConverterUtil {
@@ -30,5 +32,11 @@ public class ConverterUtil {
         return result;
     }
 
-
+    public static <E> E checkNotNull(E object, @Nullable String message) {
+        if(object == null) {
+            throw new NullPointerException(message);
+        } else {
+            return object;
+        }
+    }
 }
