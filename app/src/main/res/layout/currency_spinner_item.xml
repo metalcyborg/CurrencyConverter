@@ -22,7 +22,6 @@
         android:layout_marginLeft="@dimen/spinner_text_margin"
         android:layout_marginStart="@dimen/spinner_text_margin"
         android:text="Австралийский доллар"
-        android:textColor="@color/colorSpinnerText"
         android:textSize="@dimen/spinner_text_size"/>
 
 </LinearLayout>
