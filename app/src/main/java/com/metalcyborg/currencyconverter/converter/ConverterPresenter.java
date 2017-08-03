@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.CurrencyListLoader;
@@ -38,7 +39,12 @@ public class ConverterPresenter implements ConverterContract.Presenter,
     @Override
     public void start() {
         // Load currency data
-        mLoaderManager.initLoader(CURRENCY_QUERY, null, this).forceLoad();
+        mView.setProgressVisibility(true);
+        if(mLoaderManager.getLoader(CURRENCY_QUERY) != null) {
+            mLoaderManager.initLoader(CURRENCY_QUERY, null, this);
+        } else {
+            mLoaderManager.initLoader(CURRENCY_QUERY, null, this).forceLoad();
+        }
     }
 
     @Override
@@ -64,14 +70,17 @@ public class ConverterPresenter implements ConverterContract.Presenter,
 
     @Override
     public Loader<List<Currency>> onCreateLoader(int id, Bundle args) {
-        mView.setProgressVisibility(true);
         return mLoader;
     }
 
     @Override
     public void onLoadFinished(Loader<List<Currency>> loader, List<Currency> data) {
-        mView.addCurrencies(data);
         mView.setProgressVisibility(false);
+        if(data == null) {
+            mView.showLoadingErrorMessage();
+        } else {
+            mView.addCurrencies(data);
+        }
     }
 
     @Override

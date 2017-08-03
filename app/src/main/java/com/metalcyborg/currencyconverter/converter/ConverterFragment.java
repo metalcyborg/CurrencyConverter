@@ -2,6 +2,8 @@ package com.metalcyborg.currencyconverter.converter;
 
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +35,7 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
     private Button mCalcButton;
     private ProgressBar mProgressBar;
     private LinearLayout mLayoutContainer;
+    private CoordinatorLayout mCoordinatorLayout;
     private CurrencyAdapter mCurrencyFromAdapter;
     private CurrencyAdapter mCurrencyToAdapter;
 
@@ -59,6 +62,7 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
         mCalcButton = (Button) view.findViewById(R.id.calcButton);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
         mLayoutContainer = (LinearLayout) view.findViewById(R.id.layout_container);
+        mCoordinatorLayout = (CoordinatorLayout) getActivity().findViewById(R.id.coordinator);
 
         mCurrencyFromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -153,6 +157,15 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
     public void displaySum(float sumValue) {
         // TODO: add locale
         mAmountValueText.setText(String.format("%f", sumValue));
+    }
+
+    @Override
+    public void showLoadingErrorMessage() {
+        showSnackBar(R.string.currencies_not_available_message);
+    }
+
+    private void showSnackBar(int messageResource) {
+        Snackbar.make(mCoordinatorLayout, messageResource, Snackbar.LENGTH_LONG).show();
     }
 
     private class CurrencyAdapter extends BaseAdapter {

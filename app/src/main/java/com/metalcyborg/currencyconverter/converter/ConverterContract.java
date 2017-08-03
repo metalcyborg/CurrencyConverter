@@ -15,6 +15,8 @@ public interface ConverterContract {
         void addCurrencies(List<Currency> currencyList);
 
         void displaySum(float sumValue);
+
+        void showLoadingErrorMessage();
     }
 
     interface Presenter extends BasePresenter {
