@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.metalcyborg.currencyconverter.Injection;
 import com.metalcyborg.currencyconverter.R;
+import com.metalcyborg.currencyconverter.model.source.CurrencyListLoader;
+import com.metalcyborg.currencyconverter.model.source.CurrencyModel;
 
 public class ConverterActivity extends AppCompatActivity {
 
@@ -28,9 +30,11 @@ public class ConverterActivity extends AppCompatActivity {
                     .commit();
         }
 
+        CurrencyModel model = Injection.provideCurrencyModel(getApplicationContext());
+        CurrencyListLoader loader = new CurrencyListLoader(getApplicationContext(),
+                model);
+
         // Model, view and presenter binding
-        mPresenter = new ConverterPresenter(
-                Injection.provideCurrencyModel(getApplicationContext()),
-                fragment);
+        mPresenter = new ConverterPresenter(loader, getSupportLoaderManager(), model, fragment);
     }
 }
