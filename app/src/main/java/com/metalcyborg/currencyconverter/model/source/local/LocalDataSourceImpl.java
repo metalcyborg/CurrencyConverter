@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.GetCurrencyListCallback;
@@ -37,6 +38,18 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     @Override
     public void loadCurrenciesData(@NonNull GetCurrencyListCallback callback) {
+        List<Currency> currencyList = getCurrencies();
+
+        if(currencyList == null || currencyList.size() == 0) {
+            callback.onDataNotAvailable();
+        } else {
+            callback.onDataLoaded(currencyList);
+        }
+    }
+
+    @Nullable
+    @Override
+    public List<Currency> getCurrencies() {
         SQLiteQueryBuilder builder = new SQLiteQueryBuilder();
         builder.setTables(CurrencyPersistenceContract.CurrencyTable.TABLE_NAME);
 
@@ -58,11 +71,10 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
         cursor.close();
 
-        if(currencyList.size() == 0) {
-            callback.onDataNotAvailable();
-        } else {
-            callback.onDataLoaded(currencyList);
-        }
+        if(currencyList.size() == 0)
+            return null;
+
+        return currencyList;
     }
 
     @Override

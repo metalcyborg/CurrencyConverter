@@ -1,6 +1,7 @@
 package com.metalcyborg.currencyconverter.model.source;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.local.LocalDataSource;
@@ -61,5 +62,18 @@ public class CurrencyModelImpl implements CurrencyModel {
                 });
             }
         });
+    }
+
+    @Nullable
+    @Override
+    public List<Currency> getCurrencies() {
+        // Load from server
+        // If data not available load from DB
+        List<Currency> currencyList = mRemoteDataSource.getCurrencies();
+        if(currencyList == null) {
+            return mLocalDataSource.getCurrencies();
+        } else {
+            return currencyList;
+        }
     }
 }
