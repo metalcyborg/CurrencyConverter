@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="52dp">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/spinner_height"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spinner_text_margin"
         android:layout_marginStart="@dimen/spinner_text_margin"
-        android:textSize="@dimen/spinner_text_size"
+        android:text="AUD"
         android:textColor="@color/colorSpinnerText"
-        android:text="AUD"/>
+        android:textSize="@dimen/spinner_text_size"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Австралийский доллар"
         android:layout_marginLeft="@dimen/spinner_text_margin"
         android:layout_marginStart="@dimen/spinner_text_margin"
-        android:textSize="@dimen/spinner_text_size"
-        android:textColor="@color/colorSpinnerText"/>
+        android:text="Австралийский доллар"
+        android:textColor="@color/colorSpinnerText"
+        android:textSize="@dimen/spinner_text_size"/>
 
 </LinearLayout>

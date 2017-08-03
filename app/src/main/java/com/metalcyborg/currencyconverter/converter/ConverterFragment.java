@@ -21,6 +21,7 @@ import com.metalcyborg.currencyconverter.R;
 import com.metalcyborg.currencyconverter.model.Currency;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -155,8 +156,7 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
 
     @Override
     public void displaySum(float sumValue) {
-        // TODO: add locale
-        mAmountValueText.setText(String.format("%.4f", sumValue));
+        mAmountValueText.setText(String.format(Locale.getDefault(), "%.4f", sumValue));
     }
 
     @Override

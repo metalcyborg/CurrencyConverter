@@ -6,5 +6,6 @@
     <dimen name="label_text_size">18sp</dimen>
     <dimen name="calc_button_width">100dp</dimen>
     <dimen name="spinner_text_size">16sp</dimen>
+    <dimen name="spinner_height">64dp</dimen>
     <dimen name="amount_text_size">18sp</dimen>
 </resources>
