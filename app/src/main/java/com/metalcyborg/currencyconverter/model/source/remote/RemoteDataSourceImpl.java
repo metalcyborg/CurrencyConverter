@@ -54,12 +54,6 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         return mInstance;
     }
 
-
-    @Override
-    public void loadCurrenciesData(GetCurrencyListCallback callback) {
-
-    }
-
     @Nullable
     @Override
     public List<Currency> getCurrencies() {

@@ -34,34 +34,8 @@ public class CurrencyModelImpl implements CurrencyModel {
         return mInstance;
     }
 
-    @Override
-    public void loadCurrenciesData(final GetCurrencyListCallback callback) {
-        // Load from server
-        // If data not available load from DB
-        mRemoteDataSource.loadCurrenciesData(new GetCurrencyListCallback() {
-            @Override
-            public void onDataLoaded(List<Currency> currencyList) {
-                // Update local data
-                mLocalDataSource.updateCurrencyData(currencyList);
-                callback.onDataLoaded(currencyList);
-            }
-
-            @Override
-            public void onDataNotAvailable() {
-                // Load data from DB
-                mLocalDataSource.loadCurrenciesData(new GetCurrencyListCallback() {
-                    @Override
-                    public void onDataLoaded(List<Currency> currencyList) {
-                        callback.onDataLoaded(currencyList);
-                    }
-
-                    @Override
-                    public void onDataNotAvailable() {
-                        callback.onDataNotAvailable();
-                    }
-                });
-            }
-        });
+    public static void destroyInstance() {
+        mInstance = null;
     }
 
     @Nullable

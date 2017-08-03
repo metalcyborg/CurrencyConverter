@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface RemoteDataSource {
 
-    void loadCurrenciesData(GetCurrencyListCallback callback);
-
     @Nullable
     List<Currency> getCurrencies();
 }

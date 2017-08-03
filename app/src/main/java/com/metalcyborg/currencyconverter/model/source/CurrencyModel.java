@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface CurrencyModel {
 
-    void loadCurrenciesData(GetCurrencyListCallback callback);
-
     @Nullable
     List<Currency> getCurrencies();
 }

@@ -36,17 +36,6 @@ public class LocalDataSourceImpl implements LocalDataSource {
         return mInstance;
     }
 
-    @Override
-    public void loadCurrenciesData(@NonNull GetCurrencyListCallback callback) {
-        List<Currency> currencyList = getCurrencies();
-
-        if(currencyList == null || currencyList.size() == 0) {
-            callback.onDataNotAvailable();
-        } else {
-            callback.onDataLoaded(currencyList);
-        }
-    }
-
     @Nullable
     @Override
     public List<Currency> getCurrencies() {
