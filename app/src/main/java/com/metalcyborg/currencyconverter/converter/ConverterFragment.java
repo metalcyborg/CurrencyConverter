@@ -57,21 +57,29 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
         mLayoutContainer = (LinearLayout) view.findViewById(R.id.layout_container);
 
-        mCurrencyFromSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mCurrencyFromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: check this method
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Currency currency = (Currency) parent.getItemAtPosition(position);
                 mPresenter.setCurrencyFrom(currency);
             }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
 
-        mCurrencyToSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mCurrencyToSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO: check this method
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Currency currency = (Currency) parent.getItemAtPosition(position);
                 mPresenter.setCurrencyTo(currency);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 

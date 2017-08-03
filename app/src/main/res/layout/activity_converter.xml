@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
-            android:currencyId="@+currencyId/toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
@@ -24,7 +24,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
-        android:currencyId="@+currencyId/content"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
