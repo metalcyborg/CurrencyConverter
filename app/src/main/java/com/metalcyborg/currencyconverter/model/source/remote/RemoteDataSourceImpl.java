@@ -59,12 +59,10 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
     public List<Currency> getCurrencies() {
         try {
             URL url = new URL(URL_STRING);
-            String data = loadData(url);
+            String data = ConverterUtil.loadData(url, READ_TIMEOUT_MS, CONNECT_TIMEOUT_MS,
+                    "Cp1251");
 
-            Log.d("Result", data);
-
-            Serializer serializer = new Persister();
-            ValCurs valCurs = serializer.read(ValCurs.class, data);
+            ValCurs valCurs = ConverterUtil.deserializeData(data, ValCurs.class);
 
             List<Currency> currencyList = new ArrayList<>();
             for(ValCurs.Valute valute : valCurs.getValuteList()) {
@@ -96,51 +94,5 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
             e.printStackTrace();
             return null;
         }
-    }
-
-    private String loadData(URL url) throws IOException {
-        InputStream is = null;
-        HttpURLConnection connection = null;
-        String result = null;
-        try {
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setReadTimeout(READ_TIMEOUT_MS);
-            connection.setConnectTimeout(CONNECT_TIMEOUT_MS);
-            connection.setRequestMethod("GET");
-            connection.setDoInput(true);
-            connection.connect();
-            int responseCode = connection.getResponseCode();
-            if(responseCode != HttpsURLConnection.HTTP_OK) {
-                throw new IOException("Http error code: " + responseCode);
-            }
-
-            is = connection.getInputStream();
-            if(is != null) {
-                result = readStream(is);
-            }
-
-        } finally {
-            if(is != null) {
-                is.close();
-            }
-            if(connection != null) {
-                connection.disconnect();
-            }
-        }
-
-        return result;
-    }
-
-    private String readStream(InputStream is)
-            throws IOException {
-        Reader reader = null;
-        reader = new InputStreamReader(is, "Cp1251");
-        char[] rawBuffer = new char[1024];
-        int readSize;
-        StringBuffer buffer = new StringBuffer();
-        while(((readSize = reader.read(rawBuffer)) != -1)) {
-            buffer.append(rawBuffer, 0, readSize);
-        }
-        return buffer.toString();
     }
 }
