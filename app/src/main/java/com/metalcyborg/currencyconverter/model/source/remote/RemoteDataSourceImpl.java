@@ -5,18 +5,29 @@ import android.util.Log;
 
 import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.GetCurrencyListCallback;
+import com.metalcyborg.currencyconverter.model.source.remote.parsemodel.ValCurs;
+import com.metalcyborg.currencyconverter.util.ConverterUtil;
+
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import static android.R.attr.value;
 
 public class RemoteDataSourceImpl implements RemoteDataSource {
 
@@ -54,12 +65,43 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         try {
             URL url = new URL(URL_STRING);
             String data = loadData(url);
-            Log.d("Result", "Result: " + data);
+
+            Log.d("Result", data);
+
+            Serializer serializer = new Persister();
+            ValCurs valCurs = serializer.read(ValCurs.class, data);
+
+            List<Currency> currencyList = new ArrayList<>();
+            for(ValCurs.Valute valute : valCurs.getValuteList()) {
+                float value;
+                try {
+                    value = ConverterUtil.convertStringToFloat(valute.getValue());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    value = 0f;
+                }
+
+                Currency currency = new Currency(
+                        valute.getId(),
+                        valute.getNumCode(),
+                        valute.getCharCode(),
+                        valute.getNominal(),
+                        valute.getName(),
+                        value
+                );
+                currencyList.add(currency);
+            }
+
+            return currencyList;
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return null;
     }
 
@@ -81,7 +123,7 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
 
             is = connection.getInputStream();
             if(is != null) {
-                result = readStream(is, 500);
+                result = readStream(is);
             }
 
         } finally {
@@ -96,19 +138,15 @@ public class RemoteDataSourceImpl implements RemoteDataSource {
         return result;
     }
 
-    private String readStream(InputStream is, int maxReadSize)
-            throws IOException, UnsupportedEncodingException {
+    private String readStream(InputStream is)
+            throws IOException {
         Reader reader = null;
-        reader = new InputStreamReader(is, "UTF-8");
-        char[] rawBuffer = new char[maxReadSize];
+        reader = new InputStreamReader(is, "Cp1251");
+        char[] rawBuffer = new char[1024];
         int readSize;
         StringBuffer buffer = new StringBuffer();
-        while(((readSize = reader.read(rawBuffer)) != -1) && maxReadSize > 0) {
-            if(readSize > maxReadSize) {
-                readSize = maxReadSize;
-            }
+        while(((readSize = reader.read(rawBuffer)) != -1)) {
             buffer.append(rawBuffer, 0, readSize);
-            maxReadSize -= readSize;
         }
         return buffer.toString();
     }
