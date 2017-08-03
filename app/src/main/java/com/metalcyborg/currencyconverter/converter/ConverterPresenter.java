@@ -40,11 +40,7 @@ public class ConverterPresenter implements ConverterContract.Presenter,
     public void start() {
         // Load currency data
         mView.setProgressVisibility(true);
-        if(mLoaderManager.getLoader(CURRENCY_QUERY) != null) {
-            mLoaderManager.initLoader(CURRENCY_QUERY, null, this);
-        } else {
-            mLoaderManager.initLoader(CURRENCY_QUERY, null, this).forceLoad();
-        }
+        mLoaderManager.initLoader(CURRENCY_QUERY, null, this);
     }
 
     @Override

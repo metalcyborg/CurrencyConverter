@@ -2,6 +2,7 @@ package com.metalcyborg.currencyconverter.converter;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,9 @@ import java.util.Locale;
  */
 public class ConverterFragment extends Fragment implements ConverterContract.View {
 
+    private static final String KEY_FROM_SPINNER_POSITION = "fromSpinnerPosition";
+    private static final String KEY_TO_SPINNER_POSITION = "toSpinnerPosition";
+    private static final String KEY_AMOUNT_TEXT = "amountText";
     private ConverterContract.Presenter mPresenter;
     private Spinner mCurrencyFromSpinner;
     private Spinner mCurrencyToSpinner;
@@ -39,6 +43,8 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
     private CoordinatorLayout mCoordinatorLayout;
     private CurrencyAdapter mCurrencyFromAdapter;
     private CurrencyAdapter mCurrencyToAdapter;
+    private int mSavedFromSpinnerPosition = 0;
+    private int mSavedToSpinnerPosition = 0;
 
     public ConverterFragment() {
         // Required empty public constructor
@@ -103,6 +109,12 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
             }
         });
 
+        if(savedInstanceState != null) {
+            mSavedFromSpinnerPosition = savedInstanceState.getInt(KEY_FROM_SPINNER_POSITION, 0);
+            mSavedToSpinnerPosition = savedInstanceState.getInt(KEY_TO_SPINNER_POSITION, 0);
+            mAmountValueText.setText(savedInstanceState.getString(KEY_AMOUNT_TEXT, ""));
+        }
+
         return view;
     }
 
@@ -116,6 +128,16 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
     public void onPause() {
         super.onPause();
         mPresenter.stop();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(mLayoutContainer.getVisibility() == View.VISIBLE) {
+            outState.putInt(KEY_FROM_SPINNER_POSITION, mCurrencyFromSpinner.getSelectedItemPosition());
+            outState.putInt(KEY_TO_SPINNER_POSITION, mCurrencyToSpinner.getSelectedItemPosition());
+            outState.putString(KEY_AMOUNT_TEXT, mAmountValueText.getText().toString());
+        }
     }
 
     @Override
@@ -145,6 +167,9 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
             mCurrencyFromAdapter.notifyDataSetChanged();
         }
 
+        // Set position from savedInstanceState
+        mCurrencyFromSpinner.setSelection(mSavedFromSpinnerPosition);
+
         if(mCurrencyToAdapter == null) {
             mCurrencyToAdapter = new CurrencyAdapter(currencyList);
             mCurrencyToSpinner.setAdapter(mCurrencyToAdapter);
@@ -152,6 +177,9 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
             mCurrencyToAdapter.setItems(currencyList);
             mCurrencyToAdapter.notifyDataSetChanged();
         }
+
+        // Set position from savedInstanceState
+        mCurrencyToSpinner.setSelection(mSavedToSpinnerPosition);
     }
 
     @Override
