@@ -2,8 +2,11 @@ package com.metalcyborg.currencyconverter.model.source;
 
 import android.support.annotation.NonNull;
 
+import com.metalcyborg.currencyconverter.model.Currency;
 import com.metalcyborg.currencyconverter.model.source.local.LocalDataSource;
 import com.metalcyborg.currencyconverter.model.source.remote.RemoteDataSource;
+
+import java.util.List;
 
 public class CurrencyModelImpl implements CurrencyModel {
 
@@ -31,7 +34,32 @@ public class CurrencyModelImpl implements CurrencyModel {
     }
 
     @Override
-    public void loadCurrenciesData(GetCurrencyListCallback callback) {
+    public void loadCurrenciesData(final GetCurrencyListCallback callback) {
+        // Load from server
+        // If data not available load from DB
+        mRemoteDataSource.loadCurrenciesData(new GetCurrencyListCallback() {
+            @Override
+            public void onDataLoaded(List<Currency> currencyList) {
+                // Update local data
+                mLocalDataSource.updateCurrencyData(currencyList);
+                callback.onDataLoaded(currencyList);
+            }
 
+            @Override
+            public void onDataNotAvailable() {
+                // Load data from DB
+                mLocalDataSource.loadCurrenciesData(new GetCurrencyListCallback() {
+                    @Override
+                    public void onDataLoaded(List<Currency> currencyList) {
+                        callback.onDataLoaded(currencyList);
+                    }
+
+                    @Override
+                    public void onDataNotAvailable() {
+                        callback.onDataNotAvailable();
+                    }
+                });
+            }
+        });
     }
 }

@@ -9,5 +9,5 @@ public interface LocalDataSource {
 
     void loadCurrenciesData(GetCurrencyListCallback callback);
 
-    void updateCurrencyData(String currencyId, Currency currency);
+    void updateCurrencyData(List<Currency> currencyList);
 }
