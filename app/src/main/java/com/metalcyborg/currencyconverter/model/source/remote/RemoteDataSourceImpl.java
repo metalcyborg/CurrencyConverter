@@ -1,34 +1,15 @@
 package com.metalcyborg.currencyconverter.model.source.remote;
 
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.metalcyborg.currencyconverter.model.Currency;
-import com.metalcyborg.currencyconverter.model.source.GetCurrencyListCallback;
 import com.metalcyborg.currencyconverter.model.source.remote.parsemodel.ValCurs;
 import com.metalcyborg.currencyconverter.util.ConverterUtil;
 
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import static android.R.attr.value;
 
 public class RemoteDataSourceImpl implements RemoteDataSource {
 
