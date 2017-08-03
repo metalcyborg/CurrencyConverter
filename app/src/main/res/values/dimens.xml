@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragment_margin">16dp</dimen>
+    <dimen name="spinner_text_margin">8dp</dimen>
+    <dimen name="label_margin">16dp</dimen>
+    <dimen name="label_text_size">18sp</dimen>
+    <dimen name="calc_button_width">100dp</dimen>
+    <dimen name="spinner_text_size">16sp</dimen>
+    <dimen name="amount_text_size">18sp</dimen>
+</resources>

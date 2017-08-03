@@ -156,7 +156,7 @@ public class ConverterFragment extends Fragment implements ConverterContract.Vie
     @Override
     public void displaySum(float sumValue) {
         // TODO: add locale
-        mAmountValueText.setText(String.format("%f", sumValue));
+        mAmountValueText.setText(String.format("%.4f", sumValue));
     }
 
     @Override

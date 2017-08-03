@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Конвертер валют</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="currencies_not_available_message">Данные о курсах валют недоступны</string>
+    <string name="currencies_not_available_message">Данные о курсах валют недоступны. Проверьте подключение</string>
+    <string name="currency_from_label">Исходная валюта</string>
+    <string name="currency_to_label">Конечная валюта</string>
+    <string name="calculate_label">Расчитать</string>
 </resources>
